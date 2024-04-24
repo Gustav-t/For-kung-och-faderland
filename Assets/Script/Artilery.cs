@@ -36,8 +36,8 @@ public class Artilery : MonoBehaviour
 
     void spawn()
     {
-        float x = Random.RandomRange(-4f, 8.5f);
-        float y = Random.RandomRange(-4.5f, 4.1f);
+        float x = Random.Range(-4f, 8.5f);
+        float y = Random.Range(-4.5f, 4.1f);
         GameObject newEnemy = Instantiate(Explotion, new Vector2(x, y), Quaternion.identity);
         spawnHasHappend = true;
         StartCoroutine(Timer());

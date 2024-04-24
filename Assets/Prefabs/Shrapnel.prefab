@@ -12,8 +12,7 @@ GameObject:
   - component: {fileID: 8208918466607739042}
   - component: {fileID: 2180029952272730996}
   - component: {fileID: 6221228710531730820}
-  - component: {fileID: 7768281679401909025}
-  - component: {fileID: 6833335524874178992}
+  - component: {fileID: 2295426732330161424}
   m_Layer: 0
   m_Name: Shrapnel
   m_TagString: Bullet
@@ -31,7 +30,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -16.94, y: 0.73, z: 0}
-  m_LocalScale: {x: 0.25, y: 0.25, z: 1}
+  m_LocalScale: {x: 0.1, y: 0.1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -160,22 +159,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &7768281679401909025
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5120184114936569674}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bfd69fe990496254d86479997fe93dd1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  dirtParticles: {fileID: 9162649717708654833, guid: 5b1a49d40a97cdb478b758375ea9cb13, type: 3}
-  bloodParticles: {fileID: 9162649717708654833, guid: 914411001a7e07343b78bbc415400ee7, type: 3}
-  particles: {fileID: 9162649717708654833, guid: 41637c59194c6d2499a2e02c5e3bbca0, type: 3}
---- !u!114 &6833335524874178992
+--- !u!114 &2295426732330161424
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -187,3 +171,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 104eeb60b37f33b48be6cdb95015d85c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  speed: 20
+  dirtParticles: {fileID: 4105051068418455516, guid: 5b1a49d40a97cdb478b758375ea9cb13, type: 3}
+  bloodParticles: {fileID: 9162649717708654833, guid: 914411001a7e07343b78bbc415400ee7, type: 3}

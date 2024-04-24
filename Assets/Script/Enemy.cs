@@ -9,13 +9,19 @@ using UnityEditor.ShaderKeywordFilter;
 public class Enemy : MonoBehaviour
 {
     public float health = 100;
-
-    void Update()
+    void FixedUpdate()
     {
         if (health <= 0)
         {
             Destroy(gameObject);
         }
+
+        Rigidbody2D rb = GetComponent<Rigidbody2D>();
+        if (rb.velocity.x <= -1f) 
+        {
+            rb.AddForce(new Vector2(-3, 0));
+        }
+
     }
     public Canvas canvas;
     void Start()
@@ -54,15 +60,39 @@ public class Enemy : MonoBehaviour
         health -= damage;
         Debug.Log("Leg hit, Enemy health = " + health);
     }
+    //Explosion
+    void ExplosionHeadshot()
+    {
+        float headDamage = Random.Range(2f, 4f);
+        Rigidbody2D rb = GetComponent<Rigidbody2D>();
+        rb.AddForce(new Vector2(headDamage, 0));
+        float damage = Random.Range(10, 100);
+        health -= damage;
+        Debug.Log("Headshot! Enemy health = " + health);
+    }
+    void ExplosionChestHit()
+    {
+        float chestDamage = Random.Range(1f, 2f);
+        Rigidbody2D rb = GetComponent<Rigidbody2D>();
+        rb.AddForce(new Vector2(chestDamage, 0));
+        float damage = Random.Range(30, 40);
+        health -= damage;
+        Debug.Log("Chest hit, Enemy health = " + health);
+    }
+    void ExplosionLegHit()
+    {
+        float legDamage = Random.Range(2f, 5f);
+        Rigidbody2D rb = GetComponent<Rigidbody2D>();
+        rb.AddForce(new Vector2(legDamage, 0));
+        float damage = Random.Range(15, 50);
+        health -= damage;
+        Debug.Log("Leg hit, Enemy health = " + health);
+    }
 
     void bleeding()
     {
     }
 
-
-    float headDamage = 0;
-    float chestDamage = 0;
-    float legDAmage = 0;
 
     public TextMeshProUGUI legHitText;
     public TextMeshProUGUI chestHitText;
@@ -70,12 +100,38 @@ public class Enemy : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        if (collision.gameObject.CompareTag("Explosion"))
+        {
+            float rand = Random.Range(1, 6);
+            if (rand == 1)
+            {
+                TextMeshProUGUI newText = Instantiate(headHitText, transform.position * 100, Quaternion.identity);
+                newText.text = "Face mauled!";
+                newText.transform.SetParent(canvas.transform, false);
+                ExplosionHeadshot();
+            }
+            if (rand == 2)
+            {
+                TextMeshProUGUI newText = Instantiate(legHitText, transform.position * 100, Quaternion.identity);
+                newText.text = "Chest slashed!";
+                newText.transform.SetParent(canvas.transform, false);
+                ExplosionChestHit();
+            }
+            else
+            {
+                TextMeshProUGUI newText = Instantiate(chestHitText, transform.position * 100, Quaternion.identity);
+                newText.text = "Leg blown up!";
+                newText.transform.SetParent(canvas.transform, false);
+                ExplosionLegHit();
+            }
+
+        }
+
         if (collision.gameObject.CompareTag("Bullet"))
         {
             float rand = Random.Range(1, 4);
             if (rand == 1)
             {
-                bleeding();
                 TextMeshProUGUI newText = Instantiate(headHitText, transform.position * 100, Quaternion.identity);
                 newText.text = "Headshot!";
                 newText.transform.SetParent(canvas.transform, false);
@@ -83,7 +139,6 @@ public class Enemy : MonoBehaviour
             }
             if (rand == 2)
             {
-                bleeding();
                 TextMeshProUGUI newText = Instantiate(chestHitText, transform.position * 100, Quaternion.identity);
                 newText.text = "Chest hit!";
                 newText.transform.SetParent(canvas.transform, false);
@@ -91,7 +146,6 @@ public class Enemy : MonoBehaviour
             }
             if (rand == 3)
             {
-                bleeding();
                 TextMeshProUGUI newText = Instantiate(legHitText, transform.position * 100, Quaternion.identity);
                 newText.text = "Leg hit!";
                 newText.transform.SetParent(canvas.transform, false);
