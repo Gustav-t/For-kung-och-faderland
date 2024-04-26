@@ -3,7 +3,9 @@ guid: 104eeb60b37f33b48be6cdb95015d85c
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - dirtParticles: {fileID: 4105051068418455516, guid: 5b1a49d40a97cdb478b758375ea9cb13, type: 3}
+  - bloodParticles: {fileID: 9162649717708654833, guid: 914411001a7e07343b78bbc415400ee7, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

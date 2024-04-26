@@ -5,19 +5,10 @@ using UnityEngine;
 public class shrapnel : MonoBehaviour
 {
     private Collider2D collider;
-    public float speed = 2f;
     public GameObject dirtParticles;
     void Start()
     {
-        Rigidbody2D ridgidbody2D = GetComponent<Rigidbody2D>();
-        float randomAngle = Random.Range(0f, 360f);
-        Quaternion randomRotation = Quaternion.Euler(0, 0, randomAngle);
-
-        transform.rotation = randomRotation;
-
-        Vector2 direction = transform.right;
-
-        GetComponent<Rigidbody2D>().velocity = direction * speed;
+        Spawn();
 
         Collider2D collider = GetComponent<Collider2D>();
         float rand = Random.Range(0, 10);
@@ -32,9 +23,24 @@ public class shrapnel : MonoBehaviour
         }
 
     }
+
+    void Spawn()
+    {
+        float speed = Random.Range(2f, 5f);
+
+        Rigidbody2D ridgidbody2D = GetComponent<Rigidbody2D>();
+        float randomAngle = Random.Range(0f, 360f);
+        Quaternion randomRotation = Quaternion.Euler(0, 0, randomAngle);
+
+        transform.rotation = randomRotation;
+
+        Vector2 direction = transform.right;
+
+        GetComponent<Rigidbody2D>().velocity = direction * speed;
+    }
     IEnumerator DestroyAfterDelay(float delay)
     {
-        delay = Random.Range(0.2f, 1.2f);
+        delay = Random.Range(0.1f, 1.1f);
         yield return new WaitForSeconds(delay);
         Instantiate(dirtParticles, transform.position, Quaternion.identity);
         Destroy(gameObject);

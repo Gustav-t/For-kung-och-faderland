@@ -17,9 +17,9 @@ public class Enemy : MonoBehaviour
         }
 
         Rigidbody2D rb = GetComponent<Rigidbody2D>();
-        if (rb.velocity.x <= -1f) 
+        if (rb.velocity.x >= -3f)
         {
-            rb.AddForce(new Vector2(-3, 0));
+            rb.AddForce(new Vector3(-1, 0, 0));
         }
 
     }
@@ -27,7 +27,7 @@ public class Enemy : MonoBehaviour
     void Start()
     {
         canvas = FindObjectOfType<Canvas>(); 
-        float rand = Random.Range(-5, 6);
+        float rand = Random.Range(-4.5f, 5.5f);
         transform.position += new Vector3(0, rand, 0);
     }
 
