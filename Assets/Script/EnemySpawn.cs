@@ -28,14 +28,11 @@ public class EnemySpawn : MonoBehaviour
     
 
 
-    public float minSpeed = 20f;
-    public float maxSpeed = 35f;
+   
     void Spawn()
     {
-        float enemySpeed = Random.Range(minSpeed, maxSpeed);
-        GameObject newEnemy = Instantiate(Enemy, spawnPoint.position, Quaternion.identity);
-        Rigidbody2D enemyRb = newEnemy.GetComponent<Rigidbody2D>();
-        enemyRb.AddForce(new Vector2(enemySpeed * -1, 0));
+        
+        Instantiate(Enemy, spawnPoint.position, Quaternion.identity);
         StartCoroutine(Timer());
     }
 

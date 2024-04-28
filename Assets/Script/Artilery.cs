@@ -1,6 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
-using System.Security.Cryptography;
 using UnityEngine;
 
 public class Artilery : MonoBehaviour
@@ -10,12 +8,17 @@ public class Artilery : MonoBehaviour
     float tid = 5f;
     bool isBaught = false;
     public Color newColor = Color.red;
+
+    public Trench score;
     private void OnMouseDown()
     {
-        newColor = Color.white;
-        Renderer renderer = GetComponent<SpriteRenderer>();
-        renderer.material.color = newColor;
-        isBaught = true;
+        if (score.score >= 1000)
+        {
+            score.score -= 1000;
+            Renderer renderer = GetComponent<SpriteRenderer>();
+            renderer.enabled = false;
+            isBaught = true;
+        }
     }
     // Start is called before the first frame update
     void Start()
@@ -27,7 +30,6 @@ public class Artilery : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-
         if (isBaught == true && spawnHasHappend == false)
         {
             spawn();

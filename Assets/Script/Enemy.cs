@@ -8,26 +8,32 @@ using UnityEditor.ShaderKeywordFilter;
 
 public class Enemy : MonoBehaviour
 {
+    public GameObject enemySpawn;
     public float health = 100;
     void FixedUpdate()
-    {
-        if (health <= 0)
-        {
-            Destroy(gameObject);
-        }
-
-        Rigidbody2D rb = GetComponent<Rigidbody2D>();
-        if (rb.velocity.x >= -3f)
-        {
-            rb.AddForce(new Vector3(-1, 0, 0));
-        }
-
+    {  
+            if (health <= 0)
+            {
+                Destroy(gameObject);
+            }
+            Rigidbody2D rb = GetComponent<Rigidbody2D>();
+            if (rb.velocity.x <= -6f)
+            {
+                rb.velocity = new Vector2(0, 0);
+                rb.AddForce(new Vector3(-6, 0, 0));
+            }
     }
     public Canvas canvas;
+
+    public float minSpeed = -20f;
+    public float maxSpeed = -35f;
     void Start()
     {
+        float enemySpeed = Random.Range(minSpeed, maxSpeed); 
+        Rigidbody2D enemyRb = GetComponent<Rigidbody2D>();
+        enemyRb.AddForce(new Vector2(enemySpeed, 0));
         canvas = FindObjectOfType<Canvas>(); 
-        float rand = Random.Range(-4.5f, 5.5f);
+        float rand = Random.Range(-4.5f, 4.5f);
         transform.position += new Vector3(0, rand, 0);
     }
 
@@ -40,7 +46,6 @@ public class Enemy : MonoBehaviour
         rb.AddForce(new Vector2(headDamage, 0));
         float damage = Random.Range(20, 200);
         health -= damage;
-        Debug.Log("Headshot! Enemy health = " + health);
     }
     void chestHit()
     {
@@ -49,7 +54,6 @@ public class Enemy : MonoBehaviour
         rb.AddForce(new Vector2(chestDamage, 0));
         float damage = Random.Range(30, 60);
         health -= damage;
-        Debug.Log("Chest hit, Enemy health = " + health);
     }
     void legHit()
     {
@@ -58,7 +62,6 @@ public class Enemy : MonoBehaviour
         rb.AddForce(new Vector2(legDamage, 0));
         float damage = Random.Range(15, 30);
         health -= damage;
-        Debug.Log("Leg hit, Enemy health = " + health);
     }
     //Explosion
     void ExplosionHeadshot()
@@ -68,7 +71,6 @@ public class Enemy : MonoBehaviour
         rb.AddForce(new Vector2(headDamage, 0));
         float damage = Random.Range(10, 100);
         health -= damage;
-        Debug.Log("Headshot! Enemy health = " + health);
     }
     void ExplosionChestHit()
     {
@@ -77,7 +79,6 @@ public class Enemy : MonoBehaviour
         rb.AddForce(new Vector2(chestDamage, 0));
         float damage = Random.Range(30, 40);
         health -= damage;
-        Debug.Log("Chest hit, Enemy health = " + health);
     }
     void ExplosionLegHit()
     {
@@ -86,7 +87,6 @@ public class Enemy : MonoBehaviour
         rb.AddForce(new Vector2(legDamage, 0));
         float damage = Random.Range(15, 50);
         health -= damage;
-        Debug.Log("Leg hit, Enemy health = " + health);
     }
 
     void bleeding()
@@ -100,6 +100,11 @@ public class Enemy : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        if (collision.gameObject.CompareTag("Trench"))
+        {
+            Destroy(gameObject);
+        }
+
         if (collision.gameObject.CompareTag("Explosion"))
         {
             float rand = Random.Range(1, 6);

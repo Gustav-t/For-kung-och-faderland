@@ -15,16 +15,16 @@ public class Explosion : MonoBehaviour
     }
     IEnumerator SpawnAfterDelay(float delay)
     {
+        delay = (0.1f);
+        yield return new WaitForSeconds(delay);
+        Instantiate(shrapnel, transform.position, Quaternion.identity);
         delay = (0.2f);
         yield return new WaitForSeconds(delay);
         Instantiate(shrapnel, transform.position, Quaternion.identity);
-        delay = (0.1f);
+        delay = (0.3f);
         yield return new WaitForSeconds(delay);
         Instantiate(shrapnel, transform.position, Quaternion.identity);
-        delay = (0.1f);
-        yield return new WaitForSeconds(delay);
-        Instantiate(shrapnel, transform.position, Quaternion.identity);
-        delay = (0.1f);
+        delay = (0.4f);
         yield return new WaitForSeconds(delay);
         Instantiate(shrapnel, transform.position, Quaternion.identity);
     }

@@ -9,26 +9,30 @@ public class Shoot : MonoBehaviour
     public float shootingSpeed = 100f;
     public float shootingCooldown = 0.5f;
     private float lastShootTime = -10f;
-
+    public Trench health;
     void Update()
     {
-        if (Input.GetKey(KeyCode.W))
+        if (health.health >= 1)
         {
-            transform.Rotate(Vector3.forward, rotationSpeed * Time.deltaTime);
-        }
-        if (Input.GetKey(KeyCode.S))
-        {
-            transform.Rotate(Vector3.back, rotationSpeed * Time.deltaTime);
-        }
+            if (Input.GetKey(KeyCode.W))
+            {
+                transform.Rotate(Vector3.forward, rotationSpeed * Time.deltaTime);
+            }
+            if (Input.GetKey(KeyCode.S))
+            {
+                transform.Rotate(Vector3.back, rotationSpeed * Time.deltaTime);
+            }
 
-        if (Input.GetKey(KeyCode.Space) && Time.time - lastShootTime > shootingCooldown)
-        {
-            StartCoroutine(ShootAfterDelay(0f));
-            StartCoroutine(ShootAfterDelay(0.1f)); 
-            StartCoroutine(ShootAfterDelay(0.2f));
+            if (Input.GetKey(KeyCode.Space) && Time.time - lastShootTime > shootingCooldown)
+            {
+                StartCoroutine(ShootAfterDelay(0f));
+                StartCoroutine(ShootAfterDelay(0.1f));
+                StartCoroutine(ShootAfterDelay(0.2f));
 
-            lastShootTime = Time.time;
+                lastShootTime = Time.time;
+            } 
         }
+    
     }
 
     IEnumerator ShootAfterDelay(float delay)
