@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class shrapnel : MonoBehaviour
 {
-    private Collider2D collider;
     public GameObject dirtParticles;
     void Start()
     {

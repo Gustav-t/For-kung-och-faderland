@@ -41,50 +41,59 @@ public class Enemy : MonoBehaviour
 
     void headshot()
     {
-        float headDamage = Random.Range(0.05f, 1f);
+        float headDamage = Random.Range(0.8f, 0.9f);
         Rigidbody2D rb = GetComponent<Rigidbody2D>();
-        rb.AddForce(new Vector2(headDamage, 0));
-        float damage = Random.Range(20, 200);
+        Vector2 velocity = rb.velocity;
+        rb.velocity = velocity * headDamage;
+        float damage = Random.Range(60, 200);
         health -= damage;
+        Debug.Log("Speed = " + rb.velocity);
     }
     void chestHit()
     {
-        float chestDamage = Random.Range(0.05f, 0.5f);
+        float chestDamage = Random.Range(0.7f, 0.8f);
         Rigidbody2D rb = GetComponent<Rigidbody2D>();
-        rb.AddForce(new Vector2(chestDamage, 0));
+        Vector2 velocity = rb.velocity;
+        rb.velocity = velocity * chestDamage;
         float damage = Random.Range(30, 60);
         health -= damage;
+        Debug.Log("Speed = " + rb.velocity);
     }
     void legHit()
     {
-        float legDamage = Random.Range(0.5f, 3f);
+        float legDamage = Random.Range(0.3f, 0.7f);
         Rigidbody2D rb = GetComponent<Rigidbody2D>();
-        rb.AddForce(new Vector2(legDamage, 0));
+        Vector2 velocity = rb.velocity;
+        rb.velocity = velocity * legDamage;
         float damage = Random.Range(15, 30);
         health -= damage;
+        Debug.Log("Speed = " + rb.velocity);
     }
     //Explosion
     void ExplosionHeadshot()
     {
-        float headDamage = Random.Range(2f, 4f);
+        float headDamage = Random.Range(0.7f, 0.9f);
         Rigidbody2D rb = GetComponent<Rigidbody2D>();
-        rb.AddForce(new Vector2(headDamage, 0));
-        float damage = Random.Range(10, 100);
+        Vector2 velocity = rb.velocity;
+        rb.velocity = velocity * headDamage;
+        float damage = Random.Range(20, 120);
         health -= damage;
     }
     void ExplosionChestHit()
     {
-        float chestDamage = Random.Range(1f, 2f);
+        float chestDamage = Random.Range(0.6f, 0.9f);
         Rigidbody2D rb = GetComponent<Rigidbody2D>();
-        rb.AddForce(new Vector2(chestDamage, 0));
-        float damage = Random.Range(30, 40);
+        Vector2 velocity = rb.velocity;
+        rb.velocity = velocity * chestDamage;
+        float damage = Random.Range(30, 60);
         health -= damage;
     }
     void ExplosionLegHit()
     {
-        float legDamage = Random.Range(2f, 5f);
+        float legDamage = Random.Range(0.25f, 0.5f);
         Rigidbody2D rb = GetComponent<Rigidbody2D>();
-        rb.AddForce(new Vector2(legDamage, 0));
+        Vector2 velocity = rb.velocity;
+        rb.velocity = velocity * legDamage; 
         float damage = Random.Range(15, 50);
         health -= damage;
     }
