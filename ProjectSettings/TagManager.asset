@@ -8,6 +8,7 @@ TagManager:
   - Bullet
   - Explosion
   - Trench
+  - Gas
   layers:
   - Default
   - TransparentFX

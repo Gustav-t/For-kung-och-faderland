@@ -98,24 +98,73 @@ public class Enemy : MonoBehaviour
         health -= damage;
     }
 
-    void bleeding()
-    {
-    }
-
+    
 
     public TextMeshProUGUI legHitText;
     public TextMeshProUGUI chestHitText;
     public TextMeshProUGUI headHitText;
+    bool gashasDamaged = false;
+    private void OnCollisionStay2D(Collision2D collision)
+    {
+        Debug.Log("Trigger stay Detected with: " + collision.gameObject.name);
+
+        if (collision.gameObject.CompareTag("Gas") && !gashasDamaged)
+        {
+            GasAfterDelay(1);
+        }
+    }
+
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        Debug.Log("Trigger Exit Detected with: " + collision.gameObject.name);
+
+        if (collision.gameObject.CompareTag("Gas"))
+        {
+            float GasDamage = 1.6f;
+            Rigidbody2D rb = GetComponent<Rigidbody2D>();
+            Vector2 velocity = rb.velocity;
+            rb.velocity = velocity * GasDamage;
+            
+        }
+    }
+
+    IEnumerator GasAfterDelay(float delay)
+    {
+        gashasDamaged = true;
+        GasHit();
+        yield return new WaitForSeconds(delay);
+        gashasDamaged = false;
+    }
+
+    void GasHit()
+    {
+        TextMeshProUGUI newText = Instantiate(headHitText, transform.position * 100, Quaternion.identity);
+        newText.text = "Cough!";
+        newText.transform.SetParent(canvas.transform, false);
+        float damage = Random.Range(5, 10);
+        health -= damage;
+        Debug.Log(health);
+    }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        Debug.Log("Trigger Enter Detected with: " + collision.gameObject.name);
+
         if (collision.gameObject.CompareTag("Trench"))
         {
             Destroy(gameObject);
         }
 
-        if (collision.gameObject.CompareTag("Explosion"))
+        if (collision.gameObject.CompareTag("Gas"))
         {
+            float GasDamage = 0.6f;
+            Rigidbody2D rb = GetComponent<Rigidbody2D>();
+            Vector2 velocity = rb.velocity;
+            rb.velocity = velocity * GasDamage;
+        }
+
+            if (collision.gameObject.CompareTag("Explosion"))
+            {
             float rand = Random.Range(1, 6);
             if (rand == 1)
             {

@@ -13,7 +13,8 @@ public class Trench : MonoBehaviour
     public GameObject enemySpawn;
     public GameObject shootingPoint;
     public GameObject player;
-    public GameObject artilery;
+    public GameObject artillery;
+    public GameObject gasArtillery;
     void Start()
     {
         HP.text = "Health is " + health;
@@ -31,7 +32,8 @@ public class Trench : MonoBehaviour
         {
             Rigidbody2D playerRB = player.GetComponent<Rigidbody2D>();
             playerRB.constraints = RigidbodyConstraints2D.FreezeAll;
-            artilery.SetActive(false);
+            artillery.SetActive(false);
+            gasArtillery.SetActive(false);
             enemySpawn.SetActive(false);
             shootingPoint.SetActive(false);
         }

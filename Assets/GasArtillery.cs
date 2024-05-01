@@ -27,7 +27,6 @@ public class GasArtillery : MonoBehaviour
             newText.text = "Artillery speed upgrade " + currentPrice + " points!";
             isBaught1 = true;
             newText.color = Color.yellow;
-            fadeTime += 0.5f;
             Debug.Log(fadeTime);
         }
         else if (score.score >= currentPrice && isBaught2 != true && isBaught1 == true)
@@ -85,7 +84,8 @@ public class GasArtillery : MonoBehaviour
     {
         float x = Random.Range(-4f, 8.5f);
         float y = Random.Range(-4.5f, 4.1f);
-        GameObject newEnemy = Instantiate(GasCloud, new Vector2(x, y), Quaternion.identity);
+        GameObject newCloud = Instantiate(GasCloud, new Vector2(x, y), Quaternion.identity);
+        newCloud.GetComponent<GasCloud>().SetFadeTime(fadeTime);
         spawnHasHappend = true;
         StartCoroutine(Timer());
     }
